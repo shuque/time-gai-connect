@@ -1,0 +1,37 @@
+time-gai-connect.py
+
+   A very short python program that measures TCP connection establishment
+   times to a given hostname, using addresses returned by getaddrinfo().
+   Arguments are a hostname, and optionally a port number, otherwise port
+   80 is assumed.
+
+   I wrote this program to help me measure real connection establishment
+   times to dual stack (IPv4 and IPv6) destinations, to see how this
+   affects address selection algorithms in operating systems and
+   applications. Some modern algorithms (eg. Happy Eyeballs, Apple network
+   stats based connection preferences) take these connection times into
+   account when choosing destination addresses.
+
+   Usage:
+
+    time-gai-connect.py hostname
+    time-gai-connect.py hostname portnumber
+
+
+An example run (from a machine on the upenn campus) with the main
+IETF webserver, www.ietf.org:
+
+     $ time-gai-connect.py www.ietf.org
+     2001:1890:123a::1:1e                     90.98601 ms
+     12.22.58.30                              76.32303 ms
+
+
+   Shumon Huque
+   E-mail: shuque -at- upenn.edu
+   Web: http://www.huque.com/~shuque/
+   University of Pennsylvania.
+
+   Copyright (c) 2011-2012 Shumon Huque. All rights reserved. This program 
+   is free software; you can redistribute it and/or modify it under the same
+   terms as Python itself.
+
