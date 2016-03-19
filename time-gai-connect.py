@@ -27,8 +27,8 @@ else:
 try:
     ai_list = socket.getaddrinfo(host, PORT, socket.AF_UNSPEC, 
                                  socket.SOCK_STREAM)
-except socket.gaierror:
-    print "getaddrinfo() error:", sys.exc_info()[1]
+except socket.gaierror as e:
+    print("getaddrinfo() error: {}".format(e))
     sys.exit(1)
 
 for (family, socktype, proto, canon, sockaddr) in ai_list:
@@ -39,9 +39,8 @@ for (family, socktype, proto, canon, sockaddr) in ai_list:
         s.connect(sockaddr)
         t2 = time.time()
         s.close()
-    except socket.error:
-        print "ERROR: %s -> %s" % (sockaddr[0], sys.exc_info()[1])
+    except socket.error as e:
+        print("ERROR: {} -> {}".format(sockaddr[0], e))
         pass
     else:
-        print "%-40s %8.5f ms" % (sockaddr[0], (t2-t1)*1000.0)
-
+        print("{:<40} {:9.5f} ms".format(sockaddr[0], (t2-t1)*1000.0))
